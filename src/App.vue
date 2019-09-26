@@ -22,4 +22,14 @@ export default {
 </script>
 
 <style>
+  body {
+    background: #eee;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-size: .9em;
+  }
+  #main-view {
+    padding: 5px 20px;
+  }
 </style>

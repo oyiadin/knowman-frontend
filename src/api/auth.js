@@ -3,7 +3,6 @@ import utils from '../utils'
 function errorHandling (result, callback) {
   if (result.data.err) {
     utils.notify({
-      title: 'Error',
       content: result.data.err,
       level: 'error'
     })

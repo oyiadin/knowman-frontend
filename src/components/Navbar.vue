@@ -1,17 +1,17 @@
 <template>
   <div id="navbar">
     <span class="left">
-      <router-link to="/">Home</router-link>
+      <router-link to="/" class="block">Home</router-link>
     </span>
     <span class="right">
       <template v-if="this.$store.state.user.loggedIn">
-        <span>{{ this.$store.state.user.username }}</span>
-        <a @click="logout" href="/#">Logout</a>
+        <span class="block">{{ this.$store.state.user.username }}</span>
+        <span @click="logout">
+          <router-link to="/" class="block">Logout</router-link>
+        </span>
       </template>
       <template v-else>
-        <span>
-          <router-link to="/auth">Login / Register</router-link>
-        </span>
+        <router-link to="/auth" class="block">Login / Register</router-link>
       </template>
     </span>
   </div>
@@ -29,8 +29,8 @@ export default {
     logout () {
       api.auth.logout((err, result) => {
         if (!err && result) {
-          if (this.$router.currentRoute.path !== '/') {
-            this.$router.push('/')
+          if (this.$router.currentRoute.path !== '/auth') {
+            this.$router.push('/auth')
           }
           this.$store.commit('user/updateInfo')
         }
@@ -39,3 +39,40 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  #navbar {
+    box-shadow: 0 0 8px black;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    font-size: .9em;
+    background: black;
+    cursor: default;
+  }
+  .block:hover {
+    color: #aaa;
+  }
+  .block {
+    color: white;
+    display: inline-block;
+    transition: color .3s;
+    text-decoration: none;
+    padding: 0 10px;
+  }
+  .left {
+    display: inline-block;
+    float: left;
+  }
+  .right {
+    display: inline-block;
+    float: right;
+  }
+  .left .block:first-child {
+    padding-left: 0;
+  }
+  .right .block:last-child {
+    padding-right: 0;
+  }
+
+</style>

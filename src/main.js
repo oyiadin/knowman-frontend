@@ -18,7 +18,6 @@ new Vue({
 
 store.commit('user/updateInfo')
 // store.dispatch('notification/notify', {
-//   title: 'title',
 //   msg: 'msg',
 //   level: 'warn'
 // })
