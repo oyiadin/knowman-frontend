@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/views/Index'
-import Login from '@/views/Login'
+import Auth from '@/views/Auth'
 import Doc from '@/views/Doc'
 
 Vue.use(Router)
@@ -14,9 +14,9 @@ export default new Router({
       component: Index
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: '/auth',
+      name: 'Auth',
+      component: Auth
     },
     {
       path: '/doc',

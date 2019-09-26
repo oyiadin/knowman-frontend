@@ -6,11 +6,11 @@
     <span class="right">
       <template v-if="this.$store.state.user.loggedIn">
         <span>{{ this.$store.state.user.username }}</span>
-        <span @click="logout">Logout</span>
+        <a @click="logout" href="/#">Logout</a>
       </template>
       <template v-else>
         <span>
-          <router-link to="/login">Login</router-link>
+          <router-link to="/auth">Login / Register</router-link>
         </span>
       </template>
     </span>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import api from '../api'
+
 export default {
   name: 'Navbar',
   data () {
@@ -25,7 +27,14 @@ export default {
   },
   methods: {
     logout () {
-      console.log('logout')
+      api.auth.logout((err, result) => {
+        if (!err && result) {
+          if (this.$router.currentRoute.path !== '/') {
+            this.$router.push('/')
+          }
+          this.$store.commit('user/updateInfo')
+        }
+      })
     }
   }
 }

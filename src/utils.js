@@ -7,6 +7,7 @@ const service = axios.create({
 })
 
 function request (obj, callback) {
+  console.log(obj)
   service(obj).then(callback)
 }
 

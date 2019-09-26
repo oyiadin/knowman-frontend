@@ -16,7 +16,7 @@ new Vue({
   template: '<App/>'
 })
 
-store.commit('user/init')
+store.commit('user/updateInfo')
 // store.dispatch('notification/notify', {
 //   title: 'title',
 //   msg: 'msg',

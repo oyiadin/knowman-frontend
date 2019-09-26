@@ -1,7 +1,6 @@
 import utils from '../utils'
 
 function errorHandling (result, callback) {
-  console.log(result)
   if (result.data.err) {
     utils.notify({
       title: 'Error',
@@ -25,6 +24,22 @@ export default {
   login (data, callback) {
     utils.request({
       method: 'post',
+      url: '/auth',
+      data
+    }, (res) => { errorHandling(res, callback) })
+  },
+
+  register (data, callback) {
+    utils.request({
+      method: 'put',
+      url: '/auth',
+      data
+    }, (res) => { errorHandling(res, callback) })
+  },
+
+  logout (callback) {
+    utils.request({
+      method: 'delete',
       url: '/auth'
     }, (res) => { errorHandling(res, callback) })
   }

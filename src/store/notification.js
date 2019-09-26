@@ -9,7 +9,6 @@ const mutations = {}
 
 const actions = {
   notify (cxt, obj) {
-    console.log(cxt.state)
     cxt.state.notifying = true
     cxt.state.title = obj.title
     cxt.state.content = obj.content
