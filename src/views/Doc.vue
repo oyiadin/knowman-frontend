@@ -1,21 +1,46 @@
 <template>
   <div class="container">
     <div class="toolbar">
-      This is Toolbar
+      Welcome to {{ $route.params.id }}! This is Toolbar
     </div>
     <div class="document">
-      <textarea v-model="content" class="left"></textarea>
-      <textarea v-model="content" class="right"></textarea>
+      <textarea
+        v-model="content"
+        id="document-left"
+        @scroll="scroll('left', $event)">
+      </textarea>
+      <div
+        id="document-right"
+        @scroll="scroll('right', $event)">
+        <span v-html="renderedHTML"></span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+let md = require('markdown-it')()
+
 export default {
   name: 'Doc',
   data () {
     return {
-      content: ''
+      content: '',
+      renderedHTML: ''
+    }
+  },
+  watch: {
+    content: function (newContent, oldContent) {
+      this.renderedHTML = md.render(newContent)
+    }
+  },
+  methods: {
+    scroll (from, event) {
+      let target = (
+        from === 'left'
+          ? document.getElementById('document-right')
+          : document.getElementById('document-left'))
+      target.scrollTop = event.target.scrollTop
     }
   }
 }
@@ -45,29 +70,31 @@ export default {
     height: 100%;
     box-sizing: border-box;
   }
-  .document textarea {
+  #document-left, #document-right {
     background: transparent;
     color: #333;
-    outline: none;
-    resize: none;
     height: 100%;
     font-size: 1.1em;
-  }
-  .left {
+    overflow: scroll;
     display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+    padding: 5px 20px;
+  }
+  #document-left {
     float: left;
     border: 0;
     border-right: 1px solid #ccc;
-    box-sizing: border-box;
-    width: 50%;
-    padding: 5px 20px;
+    outline: none;
+    resize: none;
   }
-  .right {
-    display: inline-block;
+  #document-right {
     float: right;
-    border: 0;
-    box-sizing: border-box;
-    width: 50%;
-    padding: 5px 20px;
+    word-break: break-word;
+    color: black;
+    text-shadow: 0 0 1px #ccc;
+  }
+  img {
+    width: 100% !important;
   }
 </style>
