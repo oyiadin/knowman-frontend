@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/views/Index'
 import Auth from '@/views/Auth'
 import Doc from '@/views/Doc'
+import Cat from '@/views/Cat'
 
 Vue.use(Router)
 
@@ -10,8 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
-      component: Index
+      redirect: '/cat/all'
     },
     {
       path: '/auth',
@@ -19,7 +18,12 @@ export default new Router({
       component: Auth
     },
     {
-      path: '/doc',
+      path: '/cat/:id',
+      name: 'Cat',
+      component: Cat
+    },
+    {
+      path: '/doc/:id',
       name: 'Doc',
       component: Doc
     }

@@ -25,6 +25,7 @@ export default {
   html, body {
     box-sizing: border-box;
     height: 100%;
+    letter-spacing: 0.3px;
   }
   body {
     background: #eee;

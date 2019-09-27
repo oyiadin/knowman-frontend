@@ -105,6 +105,7 @@ export default {
     border: 0;
     border-bottom: 1px solid #ccc;
     transition: all ease .3s;
+    outline: none;
   }
   .buttons {
     text-align: center;
