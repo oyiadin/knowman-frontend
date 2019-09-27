@@ -67,7 +67,7 @@ export default {
   #auth-container {
     width: 90%;
     max-width: 350px;
-    margin: 0 auto;
+    margin: 5px auto;
   }
   .title {
     font-size: 2em;

@@ -30,8 +30,8 @@ export default {
     opacity: 0.8;
   }
   .inner {
-    height: 50px;
-    line-height: 50px;
+    height: 45px;
+    line-height: 45px;
     min-width: 100px;
     padding: 0 10px;
     margin: 0 auto;

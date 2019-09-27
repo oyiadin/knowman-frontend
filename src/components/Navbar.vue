@@ -11,7 +11,7 @@
         </span>
       </template>
       <template v-else>
-        <router-link to="/auth" class="block">Login / Register</router-link>
+        <router-link to="/auth" class="block">Authentication</router-link>
       </template>
     </span>
   </div>
@@ -43,12 +43,17 @@ export default {
 <style scoped>
   #navbar {
     box-shadow: 0 0 8px black;
-    height: 50px;
-    line-height: 50px;
+    height: 45px;
+    line-height: 45px;
     padding: 0 20px;
     font-size: .9em;
     background: black;
     cursor: default;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
   .block:hover {
     color: #aaa;

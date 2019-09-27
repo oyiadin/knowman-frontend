@@ -22,14 +22,19 @@ export default {
 </script>
 
 <style>
+  html, body {
+    box-sizing: border-box;
+    height: 100%;
+  }
   body {
     background: #eee;
     color: #333;
     margin: 0;
     padding: 0;
     font-size: .9em;
+    padding-top: 45px;
   }
-  #main-view {
-    padding: 5px 20px;
+  #app, #main-view {
+    height: 100%;
   }
 </style>
