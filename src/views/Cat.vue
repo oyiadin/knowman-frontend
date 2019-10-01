@@ -33,21 +33,18 @@ export default {
     }
   },
   created () {
-    this.refresh()
+    api.cat.fetchSubcats(this.$route.params.url, (err, res) => {
+      if (!err) {
+        this.subcats = res.subcats
+        api.cat.fetchDocs(this.$route.params.url, (_, res) => {
+          if (!err) {
+            this.docs = res.docs
+          }
+        })
+      }
+    })
   },
   methods: {
-    refresh () {
-      api.cat.fetchSubcats(this.$route.params.url, (err, res) => {
-        if (!err) {
-          this.subcats = res.subcats
-          api.cat.fetchDocs(this.$route.params.url, (_, res) => {
-            if (!err) {
-              this.docs = res.docs
-            }
-          })
-        }
-      })
-    },
     newdoc () {
       console.log('newdoc')
       this.$router.push('/doc/new')

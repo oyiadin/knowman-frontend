@@ -3,7 +3,7 @@
     <navbar />
     <notification />
     <div id="main-view">
-      <router-view/>
+      <router-view :key="$route.path"/>
     </div>
   </div>
 </template>
