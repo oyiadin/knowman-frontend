@@ -4,50 +4,50 @@
     <div class="items-container">
       <div class="toolbar">
         <span class="left">
-          <router-link to="/newcat/cat1">+ New Category Here</router-link>
+          <router-link :to="`/newcat/${this.$route.params.url}`">+ New Category Here</router-link>
         </span>
         <span class="right">
           <a @click="newdoc">New Document Here +</a>
         </span>
       </div>
-      <span v-for="item in items" :key="item.title">
-        <template v-if="item.type === 'cat'">
-          <router-link :to="'/cat/'+item.url" :item-type="item.type">{{ item.title }}</router-link>
-        </template>
-        <template v-else>
-          <router-link :to="'/doc/'+item.url" :item-type="item.type">{{ item.title }}</router-link>
-        </template>
+      <span v-for="item in subcats" :key="'cat-'+item.url">
+        <router-link :to="'/cat/'+item.url" item-type="cat">{{ item.title }}</router-link>
+      </span>
+      <span v-for="item in docs" :key="'cat-'+item.url">
+        <router-link :to="'/doc/'+item.url" item-type="doc">{{ item.title }}</router-link>
       </span>
     </div>
   </div>
 </template>
 
 <script>
+import api from '../api'
+
 export default {
   name: 'Index',
   data () {
     return {
       pwd: '/Linux/Bootsec',
-      items: [
-        {
-          type: 'cat',
-          url: 'cat1',
-          title: 'Category-1'
-        },
-        {
-          type: 'cat',
-          url: 'cat2',
-          title: 'Category-2'
-        },
-        {
-          type: 'doc',
-          title: 'Document-1',
-          url: 'doc1'
-        }
-      ]
+      subcats: [],
+      docs: []
     }
   },
+  created () {
+    this.refresh()
+  },
   methods: {
+    refresh () {
+      api.cat.fetchSubcats(this.$route.params.url, (err, res) => {
+        if (!err) {
+          this.subcats = res.subcats
+          api.cat.fetchDocs(this.$route.params.url, (_, res) => {
+            if (!err) {
+              this.docs = res.docs
+            }
+          })
+        }
+      })
+    },
     newdoc () {
       console.log('newdoc')
       this.$router.push('/doc/new')

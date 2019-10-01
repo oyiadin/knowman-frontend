@@ -1,5 +1,7 @@
 import auth from './auth'
+import cat from './cat'
 
 export default {
-  auth: auth
+  auth: auth,
+  cat: cat
 }

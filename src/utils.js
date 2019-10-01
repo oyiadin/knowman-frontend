@@ -8,7 +8,18 @@ const service = axios.create({
 
 function request (obj, callback) {
   console.log(obj)
-  service(obj).then(callback)
+  service(obj).then((res) => {
+    console.log(res.data)
+    if (res.data.err) {
+      notify({
+        content: res.data.err,
+        level: 'error'
+      })
+      callback(res.data.err, res.data)
+    } else {
+      callback(null, res.data)
+    }
+  })
 }
 
 function notify (obj) {

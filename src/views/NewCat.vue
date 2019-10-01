@@ -19,6 +19,7 @@
 
 <script>
 import utils from '../utils'
+import api from '../api'
 
 export default {
   data: function () {
@@ -36,7 +37,15 @@ export default {
         })
       } else {
         e.preventDefault()
-        console.log('newcat')
+        let data = {
+          title: this.title,
+          url: this.url
+        }
+        api.cat.newCat(this.$route.params.url, data, (err, result) => {
+          if (!err && result) {
+            this.$router.push(`/cat/${this.url}`)
+          }
+        })
       }
     }
   }
