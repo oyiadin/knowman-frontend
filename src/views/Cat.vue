@@ -1,13 +1,24 @@
 <template>
   <div class="container">
-    <span v-for="item in items" :key="item.title">
-      <template v-if="item.type === 'cat'">
-        <router-link :to="'/cat/'+item.url" :item-type="item.type">{{ item.title }}</router-link>
-      </template>
-      <template v-else>
-        <router-link :to="'/doc/'+item.url" :item-type="item.type">{{ item.title }}</router-link>
-      </template>
-    </span>
+    <div class="path-info">Now we are at <span class="hightlight">{{ pwd }}</span></div>
+    <div class="items-container">
+      <div class="toolbar">
+        <span class="left">
+          <router-link to="/newcat/cat1">+ New Category Here</router-link>
+        </span>
+        <span class="right">
+          <a @click="newdoc">New Document Here +</a>
+        </span>
+      </div>
+      <span v-for="item in items" :key="item.title">
+        <template v-if="item.type === 'cat'">
+          <router-link :to="'/cat/'+item.url" :item-type="item.type">{{ item.title }}</router-link>
+        </template>
+        <template v-else>
+          <router-link :to="'/doc/'+item.url" :item-type="item.type">{{ item.title }}</router-link>
+        </template>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -16,6 +27,7 @@ export default {
   name: 'Index',
   data () {
     return {
+      pwd: '/Linux/Bootsec',
       items: [
         {
           type: 'cat',
@@ -34,47 +46,78 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    newdoc () {
+      console.log('newdoc')
+      this.$router.push('/doc/new')
+    }
   }
 }
 </script>
 
 <style scoped>
-  span:hover {
+  .path-info {
+    margin: 0 auto;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
     background: black;
-    color: white;
+    box-shadow: 0 0 8px black;
+    color: #333;
   }
-  span {
+  .hightlight {
+    color: white;
+    text-shadow: 0 0 5px white;
+  }
+  .toolbar {
+    overflow: hidden;
+  }
+  .items-container .left, .items-container .right {
+    width: 50%;
+    display: block;
+    float: left;
+    cursor: pointer;
+  }
+  .items-container .left {
+    text-align: right;
+  }
+  .items-container span:hover {
+    background: black;
+  }
+  .items-container span {
     transition: all ease .3s;
     display: block;
     width: 100%;
     height: 60px;
     box-sizing: border-box;
   }
-  span a:hover {
-    color: #ccc;
+  .items-container span a:hover {
+    color: white;
+    text-shadow: 0 0 5px white;
   }
-  span a[item-type="cat"]:hover:after {
+  .items-container span a[item-type="cat"]:hover:after {
     content: " <<";
   }
-  span a[item-type="doc"]:hover:before {
+  .items-container span a[item-type="doc"]:hover:before {
     content: ">> ";
   }
-  span a {
+  .items-container span a {
     display: block;
     box-sizing: border-box;
     width: 100%;
     padding: 0 20px;
     line-height: 60px;
     height: 60px;
-    color: black;
+    color: #333;
     text-decoration: none;
     max-width: 500px;
     margin: 0 auto;
   }
-  span a[item-type="cat"] {
+  .items-container span a[item-type="cat"] {
     text-align: left;
   }
-  span a[item-type="doc"] {
+  .items-container span a[item-type="doc"] {
     text-align: right;
   }
 </style>

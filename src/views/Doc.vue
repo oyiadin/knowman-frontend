@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="toolbar">
-      Welcome to {{ $route.params.id }}! This is Toolbar
+      Welcome to {{ $route.params.url }}! This is Toolbar
     </div>
     <div class="document">
       <textarea
