@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     submit (action, e) {
-      e.preventDefault()
       let handler = action === 'login' ? api.auth.login : api.auth.register
 
       if (!this.username || !this.password) {
@@ -41,6 +40,7 @@ export default {
           level: 'error'
         })
       } else {
+        e.preventDefault()
         console.log({
           username: this.username,
           hashedPassword: sha256(this.password)
