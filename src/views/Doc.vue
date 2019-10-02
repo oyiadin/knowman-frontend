@@ -7,7 +7,8 @@
       <textarea
         v-model="content"
         id="document-left"
-        @scroll="scroll('left', $event)">
+        @scroll="scroll('left', $event)"
+        @keydown="keydown">
       </textarea>
       <div
         id="document-right"
@@ -29,6 +30,7 @@ export default {
       title: '',
       content: '',
       renderedHTML: '',
+      inputing: false,
       ws: null
     }
   },
@@ -37,10 +39,21 @@ export default {
       if (!err) {
         this.title = res.doc.title
         this.content = res.doc.content
-        this.ws = new WebSocket('ws://localhost:8000/ws')
+        this.ws = new WebSocket(`ws://${location.host}/ws/doc/${this.$route.params.url}`)
+        this.ws.json = (obj) => {
+          this.ws.send(JSON.stringify(obj))
+        }
         this.ws.onopen = (e) => {
-          console.log('aaaaa')
-          this.ws.send('hi!!!!!')
+          console.log('WebSocket connected')
+          this.ws.json({ action: 'test' })
+        }
+        this.ws.onmessage = (e) => {
+          let payload = JSON.parse(e.data)
+          console.log(`ws: ${payload}`)
+          if (payload.action === 'update') {
+            this.inputing = false
+            this.content = payload.content
+          }
         }
       } else {
         this.$router.push('/auth')
@@ -49,6 +62,9 @@ export default {
   },
   watch: {
     content: function (newContent, oldContent) {
+      if (this.inputing) {
+        this.ws.json({ action: 'update', content: newContent })
+      }
       this.renderedHTML = md.render(newContent)
     }
   },
@@ -59,6 +75,9 @@ export default {
           ? document.getElementById('document-right')
           : document.getElementById('document-left'))
       target.scrollTop = event.target.scrollTop
+    },
+    keydown () {
+      this.inputing = true
     }
   }
 }
