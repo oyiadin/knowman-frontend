@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="toolbar">
-      Welcome to {{ $route.params.url }}! This is Toolbar
+      Welcome to {{ title }}! This is Toolbar
     </div>
     <div class="document">
       <textarea
@@ -19,15 +19,27 @@
 </template>
 
 <script>
+import api from '../api'
 let md = require('markdown-it')()
 
 export default {
   name: 'Doc',
   data () {
     return {
+      title: '',
       content: '',
       renderedHTML: ''
     }
+  },
+  created () {
+    api.doc.fetchInfo(this.$route.params.url, (err, res) => {
+      if (!err) {
+        this.title = res.doc.title
+        this.content = res.doc.content
+      } else {
+        this.$router.push('/')
+      }
+    })
   },
   watch: {
     content: function (newContent, oldContent) {

@@ -22,6 +22,7 @@
 
 <script>
 import api from '../api'
+import utils from '../utils'
 
 export default {
   name: 'Index',
@@ -46,8 +47,15 @@ export default {
   },
   methods: {
     newdoc () {
-      console.log('newdoc')
-      this.$router.push('/doc/new')
+      api.doc.newDoc(this.$route.params.url, (err, res) => {
+        if (!err) {
+          this.$router.push(`/doc/${res.newDoc.url}`)
+          utils.notify({
+            content: 'New Document Created',
+            level: 'success'
+          })
+        }
+      })
     }
   }
 }

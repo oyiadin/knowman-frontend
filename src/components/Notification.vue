@@ -41,7 +41,7 @@ export default {
     background: red;
     box-shadow: 0 0 8px red;
   }
-  .info {
+  .info, .success {
     background: green;
     box-shadow: 0 0 8px green;
   }
