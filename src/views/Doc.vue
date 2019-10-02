@@ -28,7 +28,8 @@ export default {
     return {
       title: '',
       content: '',
-      renderedHTML: ''
+      renderedHTML: '',
+      ws: null
     }
   },
   created () {
@@ -36,8 +37,13 @@ export default {
       if (!err) {
         this.title = res.doc.title
         this.content = res.doc.content
+        this.ws = new WebSocket('ws://localhost:8000/ws')
+        this.ws.onopen = (e) => {
+          console.log('aaaaa')
+          this.ws.send('hi!!!!!')
+        }
       } else {
-        this.$router.push('/')
+        this.$router.push('/auth')
       }
     })
   },
