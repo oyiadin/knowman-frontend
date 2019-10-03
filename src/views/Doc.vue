@@ -8,7 +8,12 @@
         v-model="content"
         id="document-left"
         @scroll="scroll('left', $event)"
-        @keydown="keydown">
+        @click="updateSelection('click')"
+        @focus="updateSelection('focus')"
+        @keyup="updateSelection('keyup')"
+        @change="updateSelection('change')"
+        @input="contentChangedByUser($event)">
+        <!-- We have to listen both `onchange` and `oninput` to make it works on mobile phones. -->
       </textarea>
       <div
         id="document-right"
@@ -31,6 +36,8 @@ export default {
       content: '',
       renderedHTML: '',
       inputing: false,
+      selectionStart: 0,
+      selectionEnd: 0,
       ws: null
     }
   },
@@ -49,7 +56,7 @@ export default {
         }
         this.ws.onmessage = (e) => {
           let payload = JSON.parse(e.data)
-          console.log(`ws: ${payload}`)
+          console.log(payload)
           if (payload.action === 'update') {
             this.inputing = false
             this.content = payload.content
@@ -65,8 +72,15 @@ export default {
       if (this.inputing) {
         this.ws.json({ action: 'update', content: newContent })
       }
+      console.log('watch: content changed, re-rendering..')
       this.renderedHTML = md.render(newContent)
     }
+  },
+  updated () {
+    console.log('updated')
+    let el = document.getElementById('document-left')
+    console.log(this.selectionStart, this.selectionEnd)
+    el.setSelectionRange(this.selectionStart, this.selectionEnd)
   },
   methods: {
     scroll (from, event) {
@@ -76,8 +90,17 @@ export default {
           : document.getElementById('document-left'))
       target.scrollTop = event.target.scrollTop
     },
-    keydown () {
+    contentChangedByUser (e) {
+      console.log('contentChangedByUser')
       this.inputing = true
+      this.updateSelection('input')
+    },
+    updateSelection (a) {
+      console.log(`update selection: ${a}`)
+      let el = document.getElementById('document-left')
+      this.selectionStart = el.selectionStart
+      this.selectionEnd = el.selectionEnd
+      console.log(this.selectionStart, this.selectionEnd)
     }
   }
 }
