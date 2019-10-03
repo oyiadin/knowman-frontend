@@ -8,10 +8,10 @@
         v-model="content"
         id="document-left"
         @scroll="scroll('left', $event)"
-        @click="updateSelection('click')"
-        @focus="updateSelection('focus')"
-        @keyup="updateSelection('keyup')"
-        @change="updateSelection('change')"
+        @click="updateSelection('click', $event)"
+        @focus="updateSelection('focus', $event)"
+        @keyup="updateSelection('keyup', $event)"
+        @change="updateSelection('change', $event)"
         @input="contentChangedByUser($event)">
         <!-- We have to listen both `onchange` and `oninput` to make it works on mobile phones. -->
       </textarea>
@@ -93,10 +93,11 @@ export default {
     contentChangedByUser (e) {
       console.log('contentChangedByUser')
       this.inputing = true
-      this.updateSelection('input')
+      this.updateSelection('input', e)
     },
-    updateSelection (a) {
+    updateSelection (a, e) {
       console.log(`update selection: ${a}`)
+      console.log(e)
       let el = document.getElementById('document-left')
       this.selectionStart = el.selectionStart
       this.selectionEnd = el.selectionEnd
