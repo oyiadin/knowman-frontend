@@ -6,10 +6,6 @@
         <span>Title</span>
         <input type="text" name="title" v-model="title" required>
       </label>
-      <label>
-        <span>URL</span>
-        <input type="text" name="url" v-model="url" required>
-      </label>
       <div class="buttons">
         <button @click="submit">Submit</button>
       </div>
@@ -24,13 +20,12 @@ import api from '../api'
 export default {
   data: function () {
     return {
-      title: '',
-      url: ''
+      title: ''
     }
   },
   methods: {
     submit (e) {
-      if (!this.title || !this.url) {
+      if (!this.title) {
         utils.notify({
           content: 'Please fill in all of the required items',
           level: 'error'
@@ -38,8 +33,7 @@ export default {
       } else {
         e.preventDefault()
         let data = {
-          title: this.title,
-          url: this.url
+          title: this.title
         }
         api.cat.newCat(this.$route.params.url, data, (err, result) => {
           if (!err && result) {

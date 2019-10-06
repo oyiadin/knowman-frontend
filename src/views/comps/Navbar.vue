@@ -4,8 +4,8 @@
       <router-link to="/" class="block">Home</router-link>
     </span>
     <span class="right">
-      <template v-if="this.$store.state.user.loggedIn">
-        <span class="block">{{ this.$store.state.user.username }}</span>
+      <template v-if="$store.state.cred.loggedIn">
+        <span class="block">{{ $store.state.cred.username }}</span>
         <span @click="logout">
           <router-link to="/" class="block">Logout</router-link>
         </span>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import api from '../api'
+import api from '@/api'
 
 export default {
   name: 'Navbar',

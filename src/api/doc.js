@@ -1,17 +1,23 @@
-import utils from '../utils'
+import utils from '@/utils'
 
 export default {
-  newDoc (cat, callback) {
+  create (data, callback) {
     utils.request({
       method: 'put',
       url: `/doc`,
-      data: { cat }
+      data
     }, callback)
   },
-  fetchInfo (url, callback) {
+  fetchInfo (path, callback) {
     utils.request({
       method: 'get',
-      url: `/doc/${url}`
+      url: `/doc/${path}`
+    }, callback)
+  },
+  delete (path, callback) {
+    utils.request({
+      method: 'delete',
+      url: `/doc/${path}`
     }, callback)
   }
 }

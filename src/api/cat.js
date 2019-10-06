@@ -1,22 +1,23 @@
-import utils from '../utils'
+import utils from '@/utils'
 
 export default {
-  fetchSubcats (url, callback) {
+  fetchChildren (path, callback) {
     utils.request({
       method: 'get',
-      url: `/cat/${url}/subcats`
+      url: `/cat/${path}/children`
     }, callback)
   },
-  fetchDocs (url, callback) {
+  update (path, data, callback) {
     utils.request({
-      method: 'get',
-      url: `/cat/${url}/docs`
+      method: 'post',
+      url: `/cat/${path}`,
+      data
     }, callback)
   },
-  newCat (parent, data, callback) {
+  create (parentCatPath, data, callback) {
     utils.request({
       method: 'put',
-      url: `/cat/${parent}`,
+      url: `/cat/${parentCatPath}`,
       data
     }, callback)
   }

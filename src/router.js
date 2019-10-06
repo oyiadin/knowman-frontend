@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Auth from '@/views/Auth'
 import Doc from '@/views/Doc'
 import Cat from '@/views/Cat'
-import NewCat from '@/views/NewCat'
+import CatCreation from '@/views/CatCreation'
 
 Vue.use(Router)
 
@@ -19,17 +19,19 @@ export default new Router({
       component: Auth
     },
     {
-      path: '/newcat/:url',
-      name: 'NewCat',
-      component: NewCat
-    },
-    {
-      path: '/cat/:url',
+      path: '/cat/:path',
       name: 'Cat',
-      component: Cat
+      component: Cat,
+      children: [
+        {
+          path: 'new',
+          name: 'CatCreation',
+          component: CatCreation
+        }
+      ]
     },
     {
-      path: '/doc/:url',
+      path: '/doc/:path',
       name: 'Doc',
       component: Doc
     }

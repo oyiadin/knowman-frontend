@@ -1,9 +1,11 @@
-import auth from './auth'
+import cred from './cred'
 import cat from './cat'
 import doc from './doc'
+import ws from './ws'
 
 export default {
-  auth: auth,
+  cred: cred,
   cat: cat,
-  doc: doc
+  doc: doc,
+  ws: ws
 }

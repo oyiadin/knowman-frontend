@@ -1,13 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import user from './user'
-import notification from './notification'
+import cred from './cred'
+import notify from './notify'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    user,
-    notification
+    cred,
+    notify
+  },
+  actions: {
+    init (cxt) {
+      cxt.dispatch('cred/init')
+    }
   }
 })

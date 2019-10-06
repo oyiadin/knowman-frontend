@@ -1,23 +1,20 @@
 <template>
   <div id="app">
     <navbar />
-    <notification />
-    <div id="main-view">
+    <notify />
+    <div id="outer-container">
       <router-view :key="$route.path"/>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar'
-import Notification from './components/Notification'
+import Navbar from './views/comps/Navbar'
+import Notify from './views/comps/Notify'
 
 export default {
   name: 'App',
-  components: {
-    Navbar,
-    Notification
-  }
+  components: { Navbar, Notify }
 }
 </script>
 
@@ -35,7 +32,7 @@ export default {
     font-size: .9em;
     padding-top: 45px;
   }
-  #app, #main-view {
+  #app, #outer-container {
     height: 100%;
   }
 
@@ -55,7 +52,7 @@ export default {
     margin-bottom: 10px;
   }
   label span {
-    display: inline-block;
+    display: block;
     float: left;
     width: 30%;
     height: 30px;
@@ -69,7 +66,7 @@ export default {
     border-bottom: 1px solid #333;
   }
   input[type="text"] {
-    display: inline-block;
+    display: block;
     float: left;
     margin: 0;
     padding: 0;
@@ -81,6 +78,9 @@ export default {
     border-bottom: 1px solid #ccc;
     transition: all ease .3s;
     outline: none;
+  }
+  input.full-width {
+    width: 100%;
   }
   .buttons {
     text-align: center;

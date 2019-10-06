@@ -1,25 +1,20 @@
 <template>
-  <div v-if="notification.notifying" id="notification" :class="notification.level">
-    <div class="inner">{{ notification.content }}</div>
+  <div v-if="$store.state.notify.notifying" id="notify" :class="$store.state.notify.level">
+    <div class="inner">{{ $store.state.notify.content }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Notification',
+  name: 'Notify',
   data () {
     return {}
-  },
-  computed: {
-    notification () {
-      return this.$store.state.notification
-    }
   }
 }
 </script>
 
 <style scoped>
-  #notification {
+  #notify {
     display: block;
     position: absolute;
     top: 0;
@@ -28,6 +23,7 @@ export default {
     width: 100%;
     color: white;
     opacity: 0.8;
+    z-index: 1000;
   }
   .inner {
     height: 45px;
@@ -44,5 +40,9 @@ export default {
   .info, .success {
     background: green;
     box-shadow: 0 0 8px green;
+  }
+  .warn {
+    background: orange;
+    box-shadow: 0 0 8px orange;
   }
 </style>

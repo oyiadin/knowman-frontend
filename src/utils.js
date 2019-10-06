@@ -7,23 +7,26 @@ const service = axios.create({
 })
 
 function request (obj, callback) {
-  console.log(obj)
+  console.debug('[=>]', obj)
   service(obj).then((res) => {
-    console.log(res.data)
-    if (res.data.err) {
-      notify({
-        content: res.data.err,
-        level: 'error'
-      })
-      callback(res.data.err, res.data)
-    } else {
+    console.debug('[<=]', res.data)
+    if (res.success === 'yes') {
       callback(null, res.data)
+    } else {
+      if (res.data) {
+        callback(res.data.error, res.data)
+      } else {
+        notify({
+          content: 'No response, maybe the server is down.',
+          level: 'error'
+        })
+      }
     }
   })
 }
 
 function notify (obj) {
-  return store.dispatch('notification/notify', obj)
+  return store.dispatch('notify/notify', obj)
 }
 
 export default {
