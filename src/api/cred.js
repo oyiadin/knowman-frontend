@@ -1,30 +1,30 @@
 import utils from '@/utils'
 
 export default {
-  register (data, callback) {
+  register (data, callbacks) {
     utils.request({
       method: 'put',
       url: '/cred',
       data
-    }, callback)
+    }, callbacks)
   },
-  login (data, callback) {
+  login (data, callbacks) {
     utils.request({
       method: 'post',
       url: '/cred',
       data
-    }, callback)
+    }, callbacks)
   },
-  logout (callback) {
+  logout (callbacks) {
     utils.request({
       method: 'delete',
       url: '/cred'
-    }, callback)
+    }, callbacks)
   },
-  fetchUserInfo (callback) {
+  fetchUserInfo (callbacks) {
     utils.request({
       method: 'get',
       url: '/cred/userInfo'
-    }, callback)
+    }, callbacks)
   }
 }

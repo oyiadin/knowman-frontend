@@ -9,7 +9,7 @@ let state = {
 const mutations = {
   login (state, payload) {
     state.loggedIn = true
-    state.username = payload
+    state.username = payload.username
   },
   clear (state) {
     state.loggedIn = false
@@ -19,10 +19,17 @@ const mutations = {
 
 const actions = {
   init (cxt) {
-    api.cred.fetchUserInfo((err, res) => {
-      if (!err && res) {
+    api.cred.fetchUserInfo({
+      success (_, res) {
         cxt.commit('login', res.user)
-      } else {
+      },
+      tokenInvalid (_, res) {
+        utils.notify({
+          content: 'Invalid token, flushed, please retry.',
+          level: 'error'
+        })
+      },
+      tokenRequired (_, res) {
         utils.notify({
           content: 'Please login',
           level: 'warn'
@@ -31,10 +38,11 @@ const actions = {
     })
   },
   updateUserStatus (cxt) {
-    api.cred.fetchUserInfo((err, res) => {
-      if (!err && res) {
+    api.cred.fetchUserInfo({
+      success (_, res) {
         cxt.commit('login', res.user)
-      } else {
+      },
+      _anyError (_, res) {
         cxt.commit('clear')
       }
     })

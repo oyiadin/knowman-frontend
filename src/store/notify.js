@@ -24,7 +24,7 @@ const actions = {
     }
     obj.timeoutHandlerNumber = setTimeout(() => {
       cxt.commit('delNotification')
-    }, 2000)
+    }, 2500)
     cxt.commit('addNotification', obj)
   }
 }

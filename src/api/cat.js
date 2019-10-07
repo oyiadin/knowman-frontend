@@ -1,24 +1,24 @@
 import utils from '@/utils'
 
 export default {
-  fetchChildren (path, callback) {
+  fetchChildren (path, callbacks) {
     utils.request({
       method: 'get',
       url: `/cat/${path}/children`
-    }, callback)
+    }, callbacks)
   },
-  update (path, data, callback) {
+  update (path, data, callbacks) {
     utils.request({
       method: 'post',
       url: `/cat/${path}`,
       data
-    }, callback)
+    }, callbacks)
   },
-  create (parentCatPath, data, callback) {
+  create (parentCatPath, data, callbacks) {
     utils.request({
       method: 'put',
       url: `/cat/${parentCatPath}`,
       data
-    }, callback)
+    }, callbacks)
   }
 }

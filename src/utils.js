@@ -6,15 +6,30 @@ const service = axios.create({
   timeout: 5000
 })
 
-function request (obj, callback) {
+function requestDefaultSuccessHandler (_, data) {
+  console.warn('No default success api callback-handler.')
+}
+
+function requestDefaultErrorHandler (err, data) {
+  notify({
+    content: err.reason,
+    level: 'error'
+  })
+}
+
+function request (obj, callbacks) {
+  let defaultErrorHandler = callbacks['_anyError'] || requestDefaultErrorHandler
   console.debug('[=>]', obj)
   service(obj).then((res) => {
-    console.debug('[<=]', res.data)
-    if (res.success === 'yes') {
-      callback(null, res.data)
+    let data = res.data
+    console.debug('[<=]', data)
+    if (data.success === 'yes') {
+      (callbacks['success'] || requestDefaultSuccessHandler)(
+        null, data, requestDefaultSuccessHandler)
     } else {
-      if (res.data) {
-        callback(res.data.error, res.data)
+      if (data) {
+        (callbacks[data.error.reasonShort] || defaultErrorHandler)(
+          data.error, data, requestDefaultErrorHandler)
       } else {
         notify({
           content: 'No response, maybe the server is down.',
