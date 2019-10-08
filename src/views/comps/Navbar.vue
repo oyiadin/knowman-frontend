@@ -41,43 +41,42 @@ export default {
 </script>
 
 <style scoped>
-  #navbar {
-    box-shadow: 0 0 8px black;
-    height: 45px;
-    line-height: 45px;
-    padding: 0 20px;
-    font-size: .9em;
-    background: black;
-    cursor: default;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .block:hover {
-    color: #aaa;
-  }
-  .block {
-    color: white;
-    display: inline-block;
-    transition: color .3s;
-    text-decoration: none;
-    padding: 0 10px;
-  }
-  .left {
-    display: inline-block;
-    float: left;
-  }
-  .right {
-    display: inline-block;
-    float: right;
-  }
-  .left .block:first-child {
-    padding-left: 0;
-  }
-  .right .block:last-child {
-    padding-right: 0;
-  }
-
+#navbar {
+  box-shadow: 0 0 8px black;
+  height: 45px;
+  line-height: 45px;
+  padding: 0 20px;
+  font-size: .9em;
+  background: black;
+  cursor: default;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.block:hover {
+  color: #aaa;
+}
+.block {
+  color: white;
+  display: inline-block;
+  transition: color .3s;
+  text-decoration: none;
+  padding: 0 10px;
+}
+.left {
+  display: block;
+  float: left;
+}
+.right {
+  display: block;
+  float: right;
+}
+.left .block:first-child {
+  padding-left: 0;
+}
+.right .block:last-child {
+  padding-right: 0;
+}
 </style>

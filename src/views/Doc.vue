@@ -108,54 +108,54 @@ export default {
 </script>
 
 <style scoped>
-  .container {
-    height: 100%;
-    box-sizing: border-box;
-    padding-top: 35px;
-  }
-  .toolbar {
-    height: 25px;
-    line-height: 25px;
-    font-size: .8em;
-    background: black;
-    box-shadow: 0 0 8px black;
-    padding: 0 20px;
-    text-align: center;
-    position: fixed;
-    top: 45px;
-    left: 0;
-    right: 0;
-  }
-  .document {
-    overflow: hidden;
-    height: 100%;
-    box-sizing: border-box;
-  }
-  #document-left, #document-right {
-    background: transparent;
-    color: #333;
-    height: 100%;
-    font-size: 1.1em;
-    overflow: scroll;
-    display: inline-block;
-    box-sizing: border-box;
-    width: 50%;
-    padding: 5px 20px;
-  }
-  #document-left {
-    float: left;
-    border: 0;
-    border-right: 1px solid #ccc;
-    outline: none;
-    resize: none;
-  }
-  #document-right {
-    float: right;
-    word-break: break-word;
-    color: black;
-    text-shadow: 0 0 1px #ccc;
-  }
-  img {
-    width: 100% !important;
-  }
+.container {
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 35px;
+}
+.toolbar {
+  height: 25px;
+  line-height: 25px;
+  font-size: .8em;
+  background: black;
+  box-shadow: 0 0 8px black;
+  padding: 0 20px;
+  text-align: center;
+  position: fixed;
+  top: 45px;
+  left: 0;
+  right: 0;
+}
+.document {
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
+}
+#document-left, #document-right {
+  background: transparent;
+  color: #333;
+  height: 100%;
+  font-size: 1.1em;
+  overflow: scroll;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 50%;
+  padding: 5px 20px;
+}
+#document-left {
+  float: left;
+  border: 0;
+  border-right: 1px solid #ccc;
+  outline: none;
+  resize: none;
+}
+#document-right {
+  float: right;
+  word-break: break-word;
+  color: black;
+  text-shadow: 0 0 1px #ccc;
+}
+img {
+  width: 100% !important;
+}
 </style>

@@ -70,68 +70,68 @@ export default {
 </script>
 
 <style scoped>
-  .path-info {
-    margin: 0 auto;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    background: black;
-    box-shadow: 0 0 8px black;
-    color: #333;
-  }
-  .hightlight {
-    color: grey;
-    text-shadow: 0 0 5px white;
-    display: inline !important;
-  }
-  .toolbar {
-    overflow: hidden;
-  }
-  .left, .right {
-    width: 50%;
-    display: block;
-    float: left;
-    cursor: pointer;
-  }
-  .left {
-    text-align: right;
-  }
-  span:hover {
-    background: black;
-  }
-  span {
-    transition: all ease .3s;
-    display: block;
-    width: 100%;
-    height: 60px;
-    box-sizing: border-box;
-  }
-  span a:hover {
-    color: white;
-    text-shadow: 0 0 5px white;
-  }
-  span a[item-type="cat"]:hover:after {
-    content: " <<";
-  }
-  span a[item-type="doc"]:hover:before {
-    content: ">> ";
-  }
-  span a {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 0 20px;
-    line-height: 60px;
-    height: 60px;
-    color: #333;
-    text-decoration: none;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  span a[item-type="cat"] {
-    text-align: left;
-  }
-  span a[item-type="doc"] {
-    text-align: right;
-  }
+.path-info {
+  margin: 0 auto;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  background: black;
+  box-shadow: 0 0 8px black;
+  color: #333;
+}
+.hightlight {
+  color: grey;
+  text-shadow: 0 0 5px white;
+  display: inline !important;
+}
+.toolbar {
+  overflow: hidden;
+}
+.left, .right {
+  width: 50%;
+  display: block;
+  float: left;
+  cursor: pointer;
+}
+.left {
+  text-align: right;
+}
+span:hover {
+  background: black;
+}
+span {
+  transition: all ease .3s;
+  display: block;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+}
+span a:hover {
+  color: white;
+  text-shadow: 0 0 5px white;
+}
+span a[item-type="cat"]:hover:after {
+  content: " <<";
+}
+span a[item-type="doc"]:hover:before {
+  content: ">> ";
+}
+span a {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 20px;
+  line-height: 60px;
+  height: 60px;
+  color: #333;
+  text-decoration: none;
+  max-width: 500px;
+  margin: 0 auto;
+}
+span a[item-type="cat"] {
+  text-align: left;
+}
+span a[item-type="doc"] {
+  text-align: right;
+}
 </style>

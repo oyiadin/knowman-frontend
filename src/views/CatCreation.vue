@@ -47,10 +47,10 @@ export default {
 </script>
 
 <style scoped>
-  label span {
-    width: 15%;
-  }
-  label input[type="text"] {
-    width: 85%;
-  }
+label span {
+  width: 15%;
+}
+label input[type="text"] {
+  width: 85%;
+}
 </style>
